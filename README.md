@@ -7,13 +7,13 @@ Designed to support organizations in complying with GDPR, local Ethiopian privac
 
 ## 🚀 Features
 
-- 📂 Load CSV or Excel files
-- 🔍 Detect Personally Identifiable Information (PII):
+ 📂 Load CSV or Excel files
+ 🔍 Detect Personally Identifiable Information (PII):
   - Names, emails, phone numbers, national IDs, IPs, and more
-- 📊 Generate compliance score and risk rating
-- 📝 Export professional PDF/CSV compliance reports
-- 🌐 Streamlit-based web dashboard (lightweight and responsive)
-- 🔐 Optional anonymization of sensitive fields
+ 📊 Generate compliance score and risk rating
+ 📝 Export professional PDF/CSV compliance reports
+ 🌐 Streamlit-based web dashboard (lightweight and responsive)
+ 🔐 Optional anonymization of sensitive fields
 
 ---
 
@@ -107,6 +107,7 @@ this was made by
 5.Maranatha
 
 MIT License. You are free to use and modify.
+
 
 
 
