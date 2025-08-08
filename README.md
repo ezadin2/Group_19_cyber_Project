@@ -100,10 +100,14 @@ privacy_checker/
 
 📃 License
 this was made by
-Abenezer Markos
-Ezadin Badiru
+1.Abenezer Markos
+2.Ezadin Badiru
+3.Kaleab
+4.William
+5.Maranatha
 
 MIT License. You are free to use and modify.
+
 
 
 
