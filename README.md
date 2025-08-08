@@ -101,8 +101,9 @@ privacy_checker/
 📃 License
 this was made by
 Abenezer Markos
-Ezadin
+Ezadin Badiru
 
 MIT License. You are free to use and modify.
+
 
 
