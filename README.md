@@ -34,7 +34,7 @@ Designed to support organizations in complying with GDPR, local Ethiopian privac
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/privacy-compliance-checker.git
+git clone https://github.com/ezadin2/Group_19_cyber_Project.git
 cd privacy-compliance-checker
 
 
@@ -47,6 +47,8 @@ Run the Application
 
     bash
 streamlit run main.py
+or
+python3 -m streamlit run app.py
 
 🧠 How It Works
 
@@ -97,5 +99,10 @@ privacy_checker/
  Multi-language support
 
 📃 License
+this was made by
+Abenezer Markos
+Ezadin
+
 MIT License. You are free to use and modify.
+
 
