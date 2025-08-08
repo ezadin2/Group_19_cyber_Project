@@ -8,6 +8,7 @@ Designed to support organizations in complying with GDPR, local Ethiopian privac
 ## 🚀 Features
 
  📂 Load CSV or Excel files
+ 
  🔍 Detect Personally Identifiable Information (PII):
   - Names, emails, phone numbers, national IDs, IPs, and more
  
@@ -111,6 +112,7 @@ this was made by
 5.Maranatha
 
 MIT License. You are free to use and modify.
+
 
 
 
