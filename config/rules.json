@@ -1,0 +1,6 @@
+
+{
+    "max_pii_fields": 2,
+    "allowed_pii_types": ["email", "phone"],
+    "anonymization_required": true
+  }
