@@ -1,7 +1,3 @@
-a full draft for your README.md:
-
----
-
 # 🔐 Data Privacy Compliance Checker
 
 A **Streamlit-based tool** for scanning datasets or SQL tables for **PII (Personally Identifiable Information)**, checking **compliance rules**, applying **anonymization techniques**, and generating **reports** with full scan history tracking.
@@ -257,6 +253,7 @@ MIT License. You are free to use and modify.
 ```
 this project is still being devloped so stay tuned for futer updated and news...
 ```
+
 
 
 
