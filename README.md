@@ -242,7 +242,7 @@ python3 -m pytest tests/
 
 
 
-## 👥 Contributor  & Role
+## 👥 Contributor 
 |👥Contributor |
 |------|
 | Abenezer Markos| 
@@ -257,6 +257,7 @@ MIT License. You are free to use and modify.
 ```
 this project is still being devloped so stay tuned for futer updated and news...
 ```
+
 
 
 
