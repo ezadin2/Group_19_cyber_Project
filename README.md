@@ -240,19 +240,24 @@ python3 -m pytest tests/
  *API integration
  *Multi-language support
 
-📃 License
-this was made by
-1.Abenezer Markos
-2.Ezadin Badiru
-3.Kaleab
-4.William
-5.Maranatha
 
+
+## 👥 Contributor  & Role
+|👥Contributor |
+|------|
+| Abenezer Markos| 
+| Ezadin Badiru|
+| Kaleab | 
+| William | 
+| Maranatha  | 
+
+## 📃 License
 MIT License. You are free to use and modify.
 
 ```
 this project is still being devloped so stay tuned for futer updated and news...
 ```
+
 
 
 
