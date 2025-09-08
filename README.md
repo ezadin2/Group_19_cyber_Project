@@ -229,7 +229,7 @@ python3 -m pytest tests/
 ---
 ## 🛣️ Roadmap (Planned Features)
 
- *Regex-based PII detection
+ Regex-based PII detection
  **Advanced NLP** for contextual PII detection
  * Support for **Excel export** of scan history
  * Custom rule editor in-app
@@ -257,6 +257,7 @@ MIT License. You are free to use and modify.
 ```
 this project is still being devloped so stay tuned for futer updated and news...
 ```
+
 
 
 
