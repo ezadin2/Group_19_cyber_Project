@@ -1,0 +1,85 @@
+this libraries are required for this project to work successfully
+
+```change here
+
+# Core Data Processing
+pandas>=1.5.0
+numpy>=1.24.0
+openpyxl>=3.1.0
+xlsxwriter>=3.0.0
+
+# Web Application Framework
+streamlit>=1.22.0
+
+# Data Visualization
+plotly>=5.13.0
+plotly.express>=0.4.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# PDF Reporting
+fpdf>=1.7.0
+python-docx>=0.8.0
+
+# Data Anonymization & Faking
+faker>=18.0.0
+cryptography>=39.0.0
+
+# NLP for Advanced PII Detection
+spacy>=3.5.0
+scikit-learn>=1.2.0
+
+# Phone Number Validation
+phonenumbers>=8.13.0
+
+# Database
+sqlalchemy>=2.0.0
+
+# Name Detection
+names-dataset>=3.0.0
+
+# Image Processing (for enhanced reporting)
+pillow>=9.5.0
+
+# Standard Library Modules (not needed in requirements.txt as they come with Python)
+# sqlite3, csv, json, logging, hashlib, re, datetime, collections, hmac, uuid, secrets, ipaddress
+
+
+
+
+Important Note: After creating this requirements.txt file, you should install the SpaCy language model with:
+text
+
+python -m spacy download en_core_web_sm
+
+
+
+
+``` change ends here
+plotly
+sqlite3
+modules
+openpyxlythis ththis z'
+pandas
+matlib
+os
+csv
+json
+logging
+hashlib
+streamlit
+plotly.express
+fpdf
+re
+date
+faker
+xlsxwriter
+matplotlib
+collections
+spacy
+```
+
+
+
+
+

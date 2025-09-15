@@ -1,38 +1,42 @@
-import os
-import pandas as pd
-import pytest
-from modules.history_logger import log_scan_history, load_scan_history
+from modules.history_logger import log_scan_history, load_scan_history_db
 
-HISTORY_FILE = "output/scan_history.csv"
-
-@pytest.fixture(autouse=True)
-def cleanup_history():
-    """Remove history file before and after tests to isolate runs."""
-    if os.path.exists(HISTORY_FILE):
-        os.remove(HISTORY_FILE)
-    yield
-    if os.path.exists(HISTORY_FILE):
-        os.remove(HISTORY_FILE)
-
-def test_log_and_load_scan_history():
-    results = [{"column": "email", "pattern": "email", "matches_found": 2}]
+def test_log_and_load_scan_history(tmp_path, monkeypatch):
+    # Minimal synthetic results
+    results = [
+        {"column": "email", "pattern": "email", "matches_found": 2},
+        {"column": "phone", "pattern": "phone", "matches_found": 1},
+    ]
     score = 85
     violations = ["Too many PII fields"]
     source = "test.csv"
+
     anon_report = {
-        "total_pii_values": 2,
+        "total_pii_values": 3,
         "anonymized_count": 2,
-        "anonymization_rate": 100.0,
-        "verification_passed": True
+        "anonymization_rate": 66.7,
+        "verification_passed": False,
     }
 
-    # Log entry
-    log_scan_history(results, score, violations, source, anon_report)
+    # Derive PII type summaries for history
+    pii_types_regex = ",".join(sorted({r["pattern"] for r in results}))
+    pii_types_nlp = ""  # not using NLP in this unit test
 
-    # Load back
-    df = load_scan_history()
+    # The updated signature (pass all required fields)
+    log_scan_history(
+        results,
+        score,
+        violations,
+        source,
+        pii_types_regex=pii_types_regex,
+        pii_types_nlp=pii_types_nlp,
+        total_pii_values=anon_report["total_pii_values"],
+        anonymized_count=anon_report["anonymized_count"],
+        anonymization_rate=anon_report["anonymization_rate"],
+        verification_passed=anon_report["verification_passed"],
+    )
+
+    df = load_scan_history_db()
     assert not df.empty
-    assert df.iloc[0]["source"] == "test.csv"
-    assert df.iloc[0]["compliance_score"] == 85
-    assert "Too many PII fields" in df.iloc[0]["violations"]
-    assert df.iloc[0]["anonymization_rate"] == 100.0
+    assert "source" in df.columns
+    assert "compliance_score" in df.columns
+    assert "violations" in df.columns

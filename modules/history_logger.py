@@ -1,79 +1,116 @@
-# modules/history_logger.py
 import os
 import pandas as pd
+import sqlite3
 from datetime import datetime
 
 HISTORY_FILE = "output/scan_history.csv"
+DB_FILE = "output/scan_history.db"
 
-def _ensure_output_dir():
+# ---------------------------
+# Database helpers
+# ---------------------------
+def _get_db_connection():
+    os.makedirs("output", exist_ok=True)
+    conn = sqlite3.connect(DB_FILE)
+    return conn
+
+def _ensure_db_schema():
+    conn = _get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS scan_history (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        timestamp TEXT,
+        source TEXT,
+        compliance_score REAL,
+        violations TEXT,
+        pii_types_all TEXT,
+        pii_types_regex TEXT,
+        pii_types_nlp TEXT,
+        total_pii_values INTEGER,
+        anonymized_count INTEGER,
+        anonymization_rate REAL,
+        verification_passed INTEGER
+    )
+    """)
+    conn.commit()
+    conn.close()
+
+# ---------------------------
+# Main logging function
+# ---------------------------
+def log_scan_history(source, compliance_score, violations,
+                     pii_types_all, pii_types_regex, pii_types_nlp,
+                     total_pii_values, anonymized_count,
+                     anonymization_rate, verification_passed):
     os.makedirs("output", exist_ok=True)
 
-def log_scan_history(results, score, violations, source, anon_report=None):
-    """
-    Append a scan record to output/scan_history.csv
-
-    Parameters:
-      - results: list of detection dicts (each: {'column','pattern','matches_found'})
-      - score: numeric compliance score
-      - violations: list (or other) of violation strings
-      - source: string (uploaded filename or table name)
-      - anon_report: dict from anonymize_dataset with keys:
-            total_pii_values, anonymized_count, anonymization_rate, verification_passed
-    """
-    _ensure_output_dir()
-
-    # Normalize inputs
-    if isinstance(violations, (list, tuple, set)):
-        violations_str = "; ".join([str(v) for v in violations]) if violations else "None"
-    else:
-        violations_str = str(violations) if violations not in (None, float("nan")) else "None"
-
-    # extract pii types
-    pii_types = sorted(set([r.get("pattern") for r in results])) if results else []
-    pii_types_str = ", ".join([str(p) for p in pii_types]) if pii_types else "None"
-
-    # anonymization stats
-    total_pii_values = int(anon_report.get("total_pii_values", 0)) if isinstance(anon_report, dict) else 0
-    anonymized_count = int(anon_report.get("anonymized_count", 0)) if isinstance(anon_report, dict) else 0
-    anonymization_rate = float(anon_report.get("anonymization_rate", 0.0)) if isinstance(anon_report, dict) else 0.0
-    verification_passed = bool(anon_report.get("verification_passed", False)) if isinstance(anon_report, dict) else False
-
+    # Build entry dict
     new_entry = {
-        "timestamp": datetime.now().isoformat(timespec='seconds'),
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "source": source,
-        "compliance_score": score,
-        "violations": violations_str,
-        "pii_types": pii_types_str,
+        "compliance_score": compliance_score,
+        "violations": violations,
+        "pii_types_all": pii_types_all,
+        "pii_types_regex": pii_types_regex,
+        "pii_types_nlp": pii_types_nlp,
         "total_pii_values": total_pii_values,
         "anonymized_count": anonymized_count,
         "anonymization_rate": anonymization_rate,
-        "verification_passed": verification_passed
+        "verification_passed": verification_passed,
     }
 
-    # Append or create CSV
+    # --- Save to CSV (legacy support) ---
     if os.path.exists(HISTORY_FILE):
-        try:
-            df = pd.read_csv(HISTORY_FILE)
-        except Exception:
-            df = pd.DataFrame()
+        df = pd.read_csv(HISTORY_FILE)
         df = pd.concat([df, pd.DataFrame([new_entry])], ignore_index=True)
     else:
         df = pd.DataFrame([new_entry])
-
     df.to_csv(HISTORY_FILE, index=False)
 
+    # --- Save to SQLite DB (new scalable way) ---
+    _ensure_db_schema()
+    conn = _get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        INSERT INTO scan_history 
+        (timestamp, source, compliance_score, violations,
+         pii_types_all, pii_types_regex, pii_types_nlp,
+         total_pii_values, anonymized_count, anonymization_rate, verification_passed)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (
+        new_entry["timestamp"],
+        new_entry["source"],
+        new_entry["compliance_score"],
+        new_entry["violations"],
+        new_entry["pii_types_all"],
+        new_entry["pii_types_regex"],
+        new_entry["pii_types_nlp"],
+        new_entry["total_pii_values"],
+        new_entry["anonymized_count"],
+        new_entry["anonymization_rate"],
+        int(new_entry["verification_passed"])
+    ))
+    conn.commit()
+    conn.close()
+
+# ---------------------------
+# Load history functions
+# ---------------------------
 def load_scan_history():
-    """Return dataframe of history; returns empty dataframe if none."""
+    """Load history from CSV (legacy)."""
     if os.path.exists(HISTORY_FILE):
-        try:
-            return pd.read_csv(HISTORY_FILE)
-        except Exception:
-            return pd.DataFrame(columns=[
-                "timestamp","source","compliance_score","violations","pii_types",
-                "total_pii_values","anonymized_count","anonymization_rate","verification_passed"
-            ])
-    else:
-        return pd.DataFrame(columns=[
-            "timestamp","source","compliance_score","violations","pii_types",
-            "total_pii_values","anonymized_count","anonymization_rate","verification_passed"
-        ])
+        return pd.read_csv(HISTORY_FILE)
+    return pd.DataFrame()
+
+def load_scan_history_db():
+    """Load history from SQLite DB (recommended)."""
+    _ensure_db_schema()
+    conn = _get_db_connection()
+    try:
+        df = pd.read_sql_query("SELECT * FROM scan_history ORDER BY timestamp DESC", conn)
+    except Exception:
+        df = pd.DataFrame()
+    finally:
+        conn.close()
+    return df
