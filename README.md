@@ -83,8 +83,8 @@ Optional: Automatically anonymize/mask detected fields.
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/JULIASIV/privacy-checker.git
-   cd privacy-checker
+   git clone https://github.com/ezadin2/Group_19_cyber_Project.git
+   cd Group_19_cyber_Project.git
    ```
 
 2. Create a virtual environment and install dependencies:
@@ -257,6 +257,7 @@ MIT License. You are free to use and modify.
 ```
 this project is still being devloped so stay tuned for futer updated and news...
 ```
+
 
 
 
