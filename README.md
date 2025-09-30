@@ -234,10 +234,15 @@ python3 -m pytest tests/
  * Support for **Excel export** of scan history
  * Custom rule editor in-app
  * Severity levels for PII violations (High/Medium/Low)
+ 
  * Smart compliance summaries
+ 
  *Compliance score + report
+ 
  *NLP-based PII detection
+ 
  *API integration
+ 
  *Multi-language support
 
 
@@ -267,6 +272,4 @@ this project is still being devloped so stay tuned for futer updated and news...
 
 
 
-
->>>>>>> JULIASIV-patch-1-DB/-data-base-integrated-version
 
