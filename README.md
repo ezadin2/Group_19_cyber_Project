@@ -200,41 +200,52 @@ spacy
 
 ---
 
-## how to test the program without running the program it self
+## 🧪 Testing Without Running the App
 
-you can run the test_pii_detector.py  function which is locates in the test folder test/
+You can test the program without launching the Streamlit UI by running the test scripts located in the test/ folder.
 
-# 1. Clone the repository
+## 1. Clone the repository
+```
 git clone https://github.com/ezadin2/Group_19_cyber_Project.git
 cd Group_19_cyber_Project
-
-# 2. Create a virtual environment
+```
+## 2. Create a virtual environment
+```
 python -m venv venv
+```
 
-# 3. Activate the virtual environment
-# Windows (Git Bash / PowerShell)
+## 3. Activate the virtual environment
+
+Windows (Git Bash / PowerShell)
+```
 source venv/Scripts/activate
-# Linux / Mac
-# source venv/bin/activate
 
-# 4. Install all required dependencies
+```
+
+## 4. Install all required dependencies
+```
 pip install --no-cache-dir -r requirements.txt
 
-# 5. Install SpaCy language model for NLP-based PII detection
+```
+## 5. Install SpaCy language model for NLP-based PII detection
+```
 python -m spacy download en_core_web_sm
 
-# 6. Run tests without launching the Streamlit app
-
-# Option 1: Run a specific test file (PII Detector)
+```
+## 6. Run tests without launching the Streamlit app
+```
+ Option 1: Run a specific test file (PII Detector)
 python -m pytest test/test_pii_detector.py -v --disable-warnings
-
-# Option 2: Run all tests from project root
+```
+```
+ Option 2: Run all tests from project root
 python -m pytest -v --disable-warnings
-
-# Option 3: Run all tests from inside the test directory
+```
+```
+ Option 3: Run all tests from inside the test directory
 cd test
 python -m pytest -v --disable-warnings
-
+```
 ---
 ## 📊 Example Output
 
@@ -274,6 +285,7 @@ MIT License. You are free to use and modify.
 ```
 this project is still being devloped so stay tuned for futer updated and news...
 ```
+
 
 
 
