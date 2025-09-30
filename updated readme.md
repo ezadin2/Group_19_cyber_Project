@@ -1,7 +1,7 @@
-<<<<<<< HEAD
-# privacy_checker-personal-version
-personal edition of  for the insa project 
-=======
+a full draft for your README.md:
+
+---
+
 # 🔐 Data Privacy Compliance Checker
 
 A **Streamlit-based tool** for scanning datasets or SQL tables for **PII (Personally Identifiable Information)**, checking **compliance rules**, applying **anonymization techniques**, and generating **reports** with full scan history tracking.
@@ -140,20 +140,27 @@ privacy_checker/
 │──dashboard.py
 │
 │──check_setup.py
+├
+│──run_tests.py ''' is a scrypt which is used to run all the tests which are found in the test directry  in a single  command and give us a detailed report of the tests'''
 │
-│──temp/       # contains temporary files which have been scanned 
+│──test/       
+│  ├── test_pii_detector.py      # this test is used to test the pii_detector.py file 
+│  ├── test_anonymize_data.py     # this test is used to test the anonymize_data.py file 
+│  ├── test_db_loader.py           # this test is used to test the db_loader.py file 
+│  ├── test_file_loader.py        # this test is used to test the file_loader.py file 
+│  └── test_history_logger.py      # this test is used to test the history_logger.py file 
 │
 │──config/     # Configuration files and rules configuration in .json file format
 │
-│──main.py     # cli work format in terminal or bash
+│──main.py     # CLI work format in terminal or bash
 │
 │──readme.md
 │
 │──histry/      # contains scan history in cvs format 
 │
-│──test/
+│──temp/       # contains temporary files which have been scanned 
 │
-│── data/  # contains sample datas to test the app
+│── data/     # contains sample datas to test the app for the user
 
 ```
 
@@ -231,37 +238,35 @@ python3 -m pytest tests/
 * **Dashboard**: Visual trends for compliance & anonymization across multiple scans.
 
 ---
-## 🛣️ Roadmap (Planned Features)
 
- Regex-based PII detection
- **Advanced NLP** for contextual PII detection
- * Support for **Excel export** of scan history
- * Custom rule editor in-app
- * Severity levels for PII violations (High/Medium/Low)
- * Smart compliance summaries
- *Compliance score + report
- *NLP-based PII detection
- *API integration
- *Multi-language support
+## 🚀 Future Enhancements/ 🛣️ Roadmap (Planned Features)
 
+* Support for **Excel export** of scan history
+* **Advanced NLP** for contextual PII detection
+* Custom rule editor in-app
+* Severity levels for PII violations (High/Medium/Low)
+* Smart compliance summaries
+* API integration
+*  Multi-language support
 
+---
 
-## 👥 Contributor 
-|👥Contributor |
-|------|
-| Abenezer Markos| 
-| Ezadin Badiru|
-| Kaleab | 
-| William | 
-| Maranatha  | 
+## 👨‍💻 Author
 
-## 📃 License
-MIT License. You are free to use and modify.
+Developed by **Abenezer Markos**
+
+* 🎓 Material Science & Engineering + Economics minor
+* 🔐 AI/ML & Cybersecurity projects
+* 🌍 Ethiopia
+
 
 ```
 this project is still being devloped so stay tuned for futer updated and news...
 ```
 
+📃 License
+MIT License. You are free to use and modify.
+---
 
 
 
@@ -270,5 +275,3 @@ this project is still being devloped so stay tuned for futer updated and news...
 
 
 
-
->>>>>>> JULIASIV-patch-1-DB/-data-base-integrated-version
