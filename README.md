@@ -234,16 +234,11 @@ python3 -m pytest tests/
  * Support for **Excel export** of scan history
  * Custom rule editor in-app
  * Severity levels for PII violations (High/Medium/Low)
- 
  * Smart compliance summaries
- 
- *Compliance score + report
- 
- *NLP-based PII detection
- 
- *API integration
- 
- *Multi-language support
+ * Compliance score + report
+ * NLP-based PII detection
+ * API integration
+ * Multi-language support
 
 
 
@@ -262,6 +257,7 @@ MIT License. You are free to use and modify.
 ```
 this project is still being devloped so stay tuned for futer updated and news...
 ```
+
 
 
 
